@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import stockRoutes from "./routes/stockRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 // Register API routes BEFORE the 404 handler.
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/stock", stockRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

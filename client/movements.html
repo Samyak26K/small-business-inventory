@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movement History | StockPilot</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/api.js" defer></script>
+  <script src="/js/movements.js" defer></script>
+</head>
+<body>
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">INVENTORY / AUDIT</p>
+        <h1>Movement History</h1>
+        <p class="subtitle">Review stock changes, reasons and the users who performed them.</p>
+      </div>
+      <a class="button button-primary" href="/stock-entry.html">+ Record movement</a>
+    </header>
+
+    <section class="panel product-panel">
+      <div class="product-filters">
+        <select id="movement-type" aria-label="Filter by movement type">
+          <option value="">All movement types</option>
+          <option value="IN">Stock In</option>
+          <option value="OUT">Stock Out</option>
+          <option value="ADJUSTMENT">Adjustment</option>
+        </select>
+        <button id="refresh-movements" class="button button-outline" type="button">Refresh</button>
+      </div>
+
+      <p id="movement-message" class="products-message" role="status"></p>
+
+      <div class="table-scroll">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Product</th>
+              <th>Type</th>
+              <th>Change</th>
+              <th>Before → After</th>
+              <th>Reason</th>
+              <th>Performed by</th>
+            </tr>
+          </thead>
+          <tbody id="movement-body">
+            <tr><td colspan="7">Loading history...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <span id="movement-page">Page 1</span>
+        <div class="pagination-actions">
+          <button id="movement-prev" class="button button-outline" type="button">Previous</button>
+          <button id="movement-next" class="button button-outline" type="button">Next</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    if (!sessionStorage.getItem("stockpilot_token")) {
+      window.location.replace("/login.html");
+    }
+  </script>
+</body>
+</html>

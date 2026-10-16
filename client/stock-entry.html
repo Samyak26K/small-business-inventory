@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Management | StockPilot</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/api.js" defer></script>
+  <script src="/js/stock.js" defer></script>
+</head>
+<body>
+  <main class="main-content stock-page">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">INVENTORY / OPERATIONS</p>
+        <h1>Stock Management</h1>
+        <p class="subtitle">Record incoming goods, outgoing stock and physical-count adjustments.</p>
+      </div>
+      <a class="button button-outline" href="/products.html">Back to products</a>
+    </header>
+
+    <section class="panel stock-form-panel">
+      <h2>Record a stock movement</h2>
+      <p class="subtitle">Every operation is recorded in the movement history.</p>
+
+      <form id="stock-form">
+        <div class="form-field">
+          <label for="stock-product">Product *</label>
+          <select id="stock-product" required>
+            <option value="">Loading products...</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="stock-type">Movement type *</label>
+          <select id="stock-type" required>
+            <option value="IN">Stock In — receive goods</option>
+            <option value="OUT">Stock Out — issue goods</option>
+            <option value="ADJUSTMENT">Adjustment — set counted quantity</option>
+          </select>
+        </div>
+
+        <div id="current-stock" class="stock-current">
+          Select a product to view current stock.
+        </div>
+
+        <div class="form-field">
+          <label id="stock-quantity-label" for="stock-quantity">Quantity *</label>
+          <input id="stock-quantity" type="number" min="1" step="1" required>
+        </div>
+
+        <div class="form-field">
+          <label for="stock-reason">Reason *</label>
+          <input id="stock-reason" maxlength="300" required
+            placeholder="e.g. Supplier delivery or customer sale">
+        </div>
+
+        <div class="form-field">
+          <label for="stock-reference">Reference (optional)</label>
+          <input id="stock-reference" maxlength="100"
+            placeholder="e.g. PO-1001 or invoice number">
+        </div>
+
+        <p id="stock-message" role="status" class="products-message"></p>
+
+        <button id="stock-submit" class="button button-primary" type="submit">
+          Record movement
+        </button>
+      </form>
+    </section>
+
+    <script>
+      if (!sessionStorage.getItem("stockpilot_token")) {
+        window.location.replace("/login.html");
+      }
+    </script>
+  </main>
+</body>
+</html>
