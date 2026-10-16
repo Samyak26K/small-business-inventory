@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12151c">
+  <title>Inventory Reports | StockPilot</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/api.js" defer></script>
+  <script src="/js/reports.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/dashboard.html">
+        <span class="brand-icon">S</span>
+        <span>StockPilot<small>INVENTORY SYSTEM</small></span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <a class="nav-link" href="/dashboard.html">
+          <span>▦</span> Dashboard
+        </a>
+        <a class="nav-link" href="/products.html">
+          <span>▤</span> Products
+        </a>
+        <a class="nav-link" href="/stock-entry.html">
+          <span>↔</span> Stock Management
+        </a>
+        <a class="nav-link" href="/movements.html">
+          <span>◷</span> Movement History
+        </a>
+        <a class="nav-link active" href="/reports.html">
+          <span>▧</span> Inventory Reports
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div>
+          <strong>Inventory reports</strong>
+          <small id="connection-status">Loading report...</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">WORKSPACE / REPORTS</p>
+          <h1>Inventory Reports</h1>
+          <p class="subtitle">
+            Review stock levels and identify products that need replenishment.
+          </p>
+        </div>
+        <button class="button button-primary" id="export-csv">
+          ↓ Export CSV
+        </button>
+      </header>
+
+      <section class="metrics-grid" aria-label="Report summary">
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon violet">▤</span>
+            <span class="metric-caption">PRODUCTS</span>
+          </div>
+          <p class="metric-label">Products shown</p>
+          <p class="metric-value" id="report-total">—</p>
+          <p class="metric-note">Based on selected filter</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon amber">!</span>
+            <span class="metric-caption">REPLENISH</span>
+          </div>
+          <p class="metric-label">Low-stock products</p>
+          <p class="metric-value" id="report-low-stock">—</p>
+          <p class="metric-note">Above zero, at or below reorder level</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon blue">▦</span>
+            <span class="metric-caption">UNAVAILABLE</span>
+          </div>
+          <p class="metric-label">Out of stock</p>
+          <p class="metric-value" id="report-out-of-stock">—</p>
+          <p class="metric-note">Products with zero units</p>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Inventory details</h2>
+            <p>Filter the inventory and export the displayed results.</p>
+          </div>
+        </div>
+
+        <div class="report-toolbar">
+          <label for="report-filter">Stock status</label>
+          <select id="report-filter">
+            <option value="all">All active products</option>
+            <option value="low-stock">Low stock</option>
+            <option value="out-of-stock">Out of stock</option>
+          </select>
+
+          <button class="button button-secondary" id="refresh-report">
+            Refresh
+          </button>
+        </div>
+
+        <p id="report-message" role="status" aria-live="polite"></p>
+
+        <div class="table-wrapper">
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Category</th>
+                <th>Available</th>
+                <th>Reorder level</th>
+                <th>Unit price</th>
+                <th>Inventory value</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="report-table-body">
+              <tr>
+                <td colspan="8">Loading inventory report...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>StockPilot · Small Business Inventory Management</span>
+        <span>Inventory reports</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
