@@ -70,51 +70,73 @@
       <section class="section-heading">
         <div>
           <h2>Inventory at a glance</h2>
-          <p class="subtitle">Live metrics will appear when the dashboard API is ready.</p>
+          <p class="subtitle">Live inventory statistics from your database.</p>
         </div>
       </section>
 
-      <section class="metrics-grid" aria-label="Inventory metrics">
-        <article class="metric-card">
-          <div class="metric-top">
-            <span class="metric-icon violet">▤</span>
-            <span class="metric-caption">CATALOG</span>
-          </div>
-          <p class="metric-label">Total products</p>
-          <p class="metric-value" id="total-products">—</p>
-          <p class="metric-note">Active inventory items</p>
-        </article>
+      
+<section class="metrics-grid" aria-label="Inventory metrics">
+  <article class="metric-card">
+    <div class="metric-top">
+      <span class="metric-icon violet">▤</span>
+      <span class="metric-caption">CATALOG</span>
+    </div>
+    <p class="metric-label">Total products</p>
+    <p class="metric-value" id="total-products">—</p>
+    <p class="metric-note">Active inventory items</p>
+  </article>
 
-        <article class="metric-card">
-          <div class="metric-top">
-            <span class="metric-icon amber">!</span>
-            <span class="metric-caption">ATTENTION</span>
-          </div>
-          <p class="metric-label">Low-stock items</p>
-          <p class="metric-value" id="low-stock-count">—</p>
-          <p class="metric-note">At or below reorder level</p>
-        </article>
+  <article class="metric-card">
+    <div class="metric-top">
+      <span class="metric-icon amber">!</span>
+      <span class="metric-caption">ATTENTION</span>
+    </div>
+    <p class="metric-label">Low-stock items</p>
+    <p class="metric-value" id="low-stock-count">—</p>
+    <p class="metric-note">Below or at reorder level</p>
+  </article>
 
-        <article class="metric-card">
-          <div class="metric-top">
-            <span class="metric-icon blue">▦</span>
-            <span class="metric-caption">QUANTITY</span>
-          </div>
-          <p class="metric-label">Total stock units</p>
-          <p class="metric-value" id="total-stock-units">—</p>
-          <p class="metric-note">Units across active products</p>
-        </article>
+  <article class="metric-card">
+    <div class="metric-top">
+      <span class="metric-icon blue">▦</span>
+      <span class="metric-caption">QUANTITY</span>
+    </div>
+    <p class="metric-label">Total stock units</p>
+    <p class="metric-value" id="total-stock-units">—</p>
+    <p class="metric-note">Units across active products</p>
+  </article>
 
-        <article class="metric-card">
-          <div class="metric-top">
-            <span class="metric-icon green">↔</span>
-            <span class="metric-caption">ACTIVITY</span>
-          </div>
-          <p class="metric-label">Recent movements</p>
-          <p class="metric-value" id="recent-movement-count">—</p>
-          <p class="metric-note">Latest inventory transactions</p>
-        </article>
-      </section>
+  <article class="metric-card">
+    <div class="metric-top">
+      <span class="metric-icon green">₹</span>
+      <span class="metric-caption">VALUATION</span>
+    </div>
+    <p class="metric-label">Inventory value</p>
+    <p class="metric-value" id="inventory-value">—</p>
+    <p class="metric-note">Price × available quantity</p>
+  </article>
+
+  <article class="metric-card">
+    <div class="metric-top">
+      <span class="metric-icon amber">!</span>
+      <span class="metric-caption">OUT OF STOCK</span>
+    </div>
+    <p class="metric-label">Out-of-stock items</p>
+    <p class="metric-value" id="out-of-stock-count">—</p>
+    <p class="metric-note">Active products with zero stock</p>
+  </article>
+
+  <article class="metric-card">
+    <div class="metric-top">
+      <span class="metric-icon green">↔</span>
+      <span class="metric-caption">ACTIVITY</span>
+    </div>
+    <p class="metric-label">Recent movements</p>
+    <p class="metric-value" id="recent-movement-count">—</p>
+    <p class="metric-note">Latest inventory transactions</p>
+  </article>
+</section>
+
 
       <section class="content-grid">
         <article class="panel">
