@@ -1266,15 +1266,20 @@ h1 {
 }
 
 
-/* Stock movement form */
 
+/* Stock movement form */
 .stock-page {
-  max-width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 30px 32px;
 }
 
 .stock-form-panel {
+  width: 100%;
   max-width: 650px;
+  margin: 0;
   padding: 26px;
 }
 
@@ -1293,6 +1298,7 @@ h1 {
 
 .stock-form-panel .form-field {
   margin-bottom: 0;
+  min-width: 0;
 }
 
 .stock-form-panel label {
@@ -1301,7 +1307,9 @@ h1 {
 
 .stock-form-panel input,
 .stock-form-panel select {
+  display: block;
   width: 100%;
+  min-width: 0;
   min-height: 44px;
   padding: 10px 12px;
   border: 1px solid var(--border);
@@ -1323,6 +1331,16 @@ h1 {
 .stock-form-panel button:disabled {
   cursor: wait;
   opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .stock-page {
+    padding: 14px;
+  }
+
+  .stock-form-panel {
+    padding: 18px;
+  }
 }
 
 
@@ -1371,5 +1389,150 @@ h1 {
   .report-toolbar select,
   .report-toolbar .button {
     width: 100%;
+  }
+}
+
+
+/* MILESTONE 7: Responsive layout fixes */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.main-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.panel,
+.metric-card,
+.content-grid {
+  min-width: 0;
+}
+
+.table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper table {
+  min-width: 650px;
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1199px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .main-content {
+    padding: 14px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .topbar .button,
+  .topbar button {
+    width: 100%;
+  }
+
+  .metrics-grid,
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .nav-link {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .report-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .report-toolbar select,
+  .report-toolbar button {
+    width: 100%;
+  }
+}
+
+
+
+/* Stock Management desktop layout fix */
+@media (min-width: 1200px) {
+  .app-shell:has(.stock-page) {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .app-shell:has(.stock-page) > .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    width: 220px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .app-shell:has(.stock-page) > .stock-page {
+    grid-column: 2;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 30px 32px;
+    overflow-x: hidden;
+  }
+
+  .stock-page .stock-form-panel {
+    width: 100%;
+    max-width: 760px;
+    margin-right: auto;
+  }
+
+  .stock-page .topbar {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
   }
 }
