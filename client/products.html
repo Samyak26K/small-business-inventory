@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | StockPilot</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/api.js" defer></script>
+  <script src="/js/products.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/dashboard.html">
+        <span class="brand-icon">S</span>
+        <span>StockPilot<small>INVENTORY SYSTEM</small></span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <a class="nav-link" href="/dashboard.html"><span>▦</span> Dashboard</a>
+        <a class="nav-link active" href="/products.html"><span>▤</span> Products</a>
+        <a class="nav-link" href="/stock-entry.html"><span>↔</span> Stock Management</a>
+        <a class="nav-link" href="/movements.html"><span>◷</span> Movement History</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong>StockPilot</strong><small>Product catalog</small></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">WORKSPACE / CATALOG</p>
+          <h1>Products</h1>
+          <p class="subtitle">Manage your catalog, pricing and stock thresholds.</p>
+        </div>
+        <button class="button button-primary" id="add-product-button" type="button">
+          + Add product
+        </button>
+      </header>
+
+      <section class="metrics-grid product-summary">
+        <article class="metric-card">
+          <p class="metric-label">Products shown</p>
+          <p class="metric-value" id="products-count">0</p>
+          <p class="metric-note">Matches your current filters</p>
+        </article>
+        <article class="metric-card">
+          <p class="metric-label">Low stock</p>
+          <p class="metric-value" id="products-low-stock">0</p>
+          <p class="metric-note">At or below reorder level</p>
+        </article>
+        <article class="metric-card">
+          <p class="metric-label">Inventory value</p>
+          <p class="metric-value" id="products-value">₹0</p>
+          <p class="metric-note">Current filtered stock value</p>
+        </article>
+        <article class="metric-card">
+          <p class="metric-label">Catalog status</p>
+          <p class="metric-value" id="catalog-status">Live</p>
+          <p class="metric-note">Loaded from the server</p>
+        </article>
+      </section>
+
+      <section class="panel product-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Product catalog</h2>
+            <p>Search by product name or SKU. Select filters to narrow the list.</p>
+          </div>
+        </div>
+
+        <div class="product-filters">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="product-search" type="search" placeholder="Search name or SKU...">
+          </label>
+
+          <select id="category-filter" aria-label="Filter by category">
+            <option value="">All categories</option>
+          </select>
+
+          <select id="status-filter" aria-label="Filter by stock status">
+            <option value="all">All stock statuses</option>
+            <option value="in-stock">In stock</option>
+            <option value="low-stock">Low stock</option>
+            <option value="out-of-stock">Out of stock</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+
+        <p id="products-message" class="products-message" role="status"></p>
+
+        <div class="table-scroll">
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Category</th>
+                <th>Unit price</th>
+                <th>Quantity</th>
+                <th>Stock status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body">
+              <tr><td colspan="7">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span id="products-pagination">Page 1</span>
+          <div class="pagination-actions">
+            <button class="button button-outline" id="previous-page" type="button">Previous</button>
+            <button class="button button-outline" id="next-page" type="button">Next</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="product-dialog" class="product-dialog">
+    <form id="product-form" class="product-form">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">PRODUCT CATALOG</p>
+          <h2 id="product-dialog-title">Add product</h2>
+        </div>
+        <button id="close-product-dialog" class="icon-button" type="button" aria-label="Close">×</button>
+      </div>
+
+      <input id="product-id" type="hidden">
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="product-name">Product name *</label>
+          <input id="product-name" maxlength="120" required>
+        </div>
+
+        <div class="form-field">
+          <label for="product-sku">SKU *</label>
+          <input id="product-sku" maxlength="40" required>
+        </div>
+
+        <div class="form-field">
+          <label for="product-category">Category *</label>
+          <select id="product-category" required></select>
+        </div>
+
+        <div class="form-field">
+          <label for="product-price">Unit price (₹) *</label>
+          <input id="product-price" type="number" min="0" step="0.01" required>
+        </div>
+
+        <div class="form-field">
+          <label for="product-quantity">Opening quantity *</label>
+          <input id="product-quantity" type="number" min="0" step="1" required>
+        </div>
+
+        <div class="form-field">
+          <label for="product-reorder">Reorder level *</label>
+          <input id="product-reorder" type="number" min="0" step="1" value="5" required>
+        </div>
+
+        <div class="form-field form-field-wide">
+          <label for="product-description">Description</label>
+          <textarea id="product-description" maxlength="1000" rows="3"></textarea>
+        </div>
+      </div>
+
+      <p id="product-form-message" class="login-message" role="alert" hidden></p>
+
+      <div class="dialog-actions">
+        <button class="button button-outline" id="cancel-product" type="button">Cancel</button>
+        <button class="button button-primary" id="save-product" type="submit">Save product</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    // A page navigation guard only; private API routes enforce real access control.
+    if (!sessionStorage.getItem("stockpilot_token")) {
+      window.location.replace("/login.html");
+    }
+  </script>
+</body>
+</html>

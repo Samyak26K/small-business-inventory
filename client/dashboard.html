@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12151c">
+  <title>Dashboard | StockPilot</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/api.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/dashboard.html">
+        <span class="brand-icon">S</span>
+        <span>StockPilot<small>INVENTORY SYSTEM</small></span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <a class="nav-link active" href="/dashboard.html">
+          <span>▦</span> Dashboard
+        </a>
+        <a class="nav-link" href="/products.html">
+          <span>▤</span> Products
+        </a>
+        <a class="nav-link" href="/stock-entry.html">
+          <span>↔</span> Stock Management
+        </a>
+        <a class="nav-link" href="/movements.html">
+          <span>◷</span> Movement History
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div>
+          <strong>Development mode</strong>
+          <small id="connection-status">Checking server...</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">OVERVIEW / INVENTORY</p>
+          <h1>Dashboard</h1>
+          <p class="subtitle">Here's what's happening with your inventory.</p>
+        </div>
+        <a class="button button-primary" href="/stock-entry.html">
+          + Record stock
+        </a>
+      </header>
+
+      <section class="welcome-panel">
+        <div>
+          <span class="welcome-tag">INVENTORY OVERVIEW</span>
+          <h2>Know your stock.<br>Run your business better.</h2>
+          <p>Manage products, monitor stock levels and keep every movement accountable.</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="art-ring"></div>
+          <div class="art-box">S</div>
+          <div class="art-dot"></div>
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <div>
+          <h2>Inventory at a glance</h2>
+          <p class="subtitle">Live metrics will appear when the dashboard API is ready.</p>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Inventory metrics">
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon violet">▤</span>
+            <span class="metric-caption">CATALOG</span>
+          </div>
+          <p class="metric-label">Total products</p>
+          <p class="metric-value" id="total-products">—</p>
+          <p class="metric-note">Active inventory items</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon amber">!</span>
+            <span class="metric-caption">ATTENTION</span>
+          </div>
+          <p class="metric-label">Low-stock items</p>
+          <p class="metric-value" id="low-stock-count">—</p>
+          <p class="metric-note">At or below reorder level</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon blue">▦</span>
+            <span class="metric-caption">QUANTITY</span>
+          </div>
+          <p class="metric-label">Total stock units</p>
+          <p class="metric-value" id="total-stock-units">—</p>
+          <p class="metric-note">Units across active products</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-icon green">↔</span>
+            <span class="metric-caption">ACTIVITY</span>
+          </div>
+          <p class="metric-label">Recent movements</p>
+          <p class="metric-value" id="recent-movement-count">—</p>
+          <p class="metric-note">Latest inventory transactions</p>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Recent movements</h2>
+              <p>Track stock coming in and going out.</p>
+            </div>
+            <a class="text-link" href="/movements.html">View all →</a>
+          </div>
+
+          <div class="empty-state" id="recent-movements">
+            <span class="empty-icon">◷</span>
+            <h3>Preparing your activity feed</h3>
+            <p>Connect the database and record your first stock movement to see it here.</p>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Quick actions</h2>
+              <p>Manage your inventory efficiently.</p>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <a class="action-item" href="/products.html">
+              <span class="action-icon violet">＋</span>
+              <span><strong>Manage products</strong><small>Add or update your catalog</small></span>
+              <span class="action-arrow">→</span>
+            </a>
+            <a class="action-item" href="/stock-entry.html">
+              <span class="action-icon green">↗</span>
+              <span><strong>Stock in / stock out</strong><small>Record inventory changes</small></span>
+              <span class="action-arrow">→</span>
+            </a>
+            <a class="action-item" href="/movements.html">
+              <span class="action-icon blue">◷</span>
+              <span><strong>Movement history</strong><small>Review transaction records</small></span>
+              <span class="action-arrow">→</span>
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <footer class="page-footer">
+        <span>StockPilot · Small Business Inventory Management</span>
+        <span>Built with HTML, CSS, JavaScript &amp; Node.js</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
