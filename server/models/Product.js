@@ -61,7 +61,6 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-productSchema.index({ sku: 1 }, { unique: true });
 productSchema.index({ name: 1 });
 productSchema.index({ categoryId: 1, active: 1 });
 
