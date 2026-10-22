@@ -7,6 +7,7 @@
   <title>Movement History | StockPilot</title>
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/api.js" defer></script>
+  <script src="/js/sidebar.js" defer></script>
   <script src="/js/movements.js" defer></script>
 </head>
 <body>
@@ -26,10 +27,31 @@
             <a class="nav-link" href="/reports.html"><span>▧</span> Inventory Reports</a>
         </nav>
     
-        <div class="sidebar-bottom">
-            <div class="status-dot"></div>
-            <div><strong>StockPilot</strong><small>Inventory operations</small></div>
-        </div>
+        
+<div class="sidebar-bottom sidebar-account">
+  <div class="sidebar-account-user">
+    <span class="account-avatar" aria-hidden="true">SA</span>
+    <div class="account-details">
+      <strong>Shop Administrator</strong>
+      <small>Administrator account</small>
+    </div>
+  </div>
+
+  <div class="sidebar-account-status">
+    <span class="status-dot"></span>
+    <small>Inventory workspace</small>
+  </div>
+
+  <button
+    class="sidebar-logout"
+    id="sidebar-logout"
+    type="button"
+  >
+    <span aria-hidden="true">↪</span>
+    <span>Logout</span>
+  </button>
+</div>
+
         </aside>
         
   <main class="main-content">
