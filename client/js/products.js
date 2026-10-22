@@ -15,6 +15,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const formMessage = $("product-form-message");
   const pageMessage = $("products-message");
   const saveButton = $("save-product");
+  const skuInput = $("product-sku");
+const skuHelp = $("sku-help");
+
+let skuManuallyEdited = false;
+
+function generateSku(productName = "") {
+  const prefix = productName
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 12)
+    .replace(/-+$/g, "");
+
+  const uniquePart = crypto.randomUUID()
+    .replace(/-/g, "")
+    .slice(0, 10)
+    .toUpperCase();
+
+  return `${prefix || "SKU"}-${uniquePart}`;
+}
+
+function suggestSku() {
+  skuInput.value = generateSku($("product-name").value);
+  skuHelp.textContent =
+    "Generated automatically. You can edit it if needed.";
+}
 
   let categories = [];
   let page = 1;
@@ -175,15 +203,24 @@ async function loadCategories() {
   }
 
   function openNewProduct() {
-    form.reset();
-    $("product-id").value = "";
-    $("product-dialog-title").textContent = "Add product";
-    $("product-quantity").disabled = false;
-    $("product-form-message").hidden = true;
-    $("product-reorder").value = "5";
-    saveButton.textContent = "Save product";
-    dialog.showModal();
-  }
+  form.reset();
+
+  $("product-id").value = "";
+  $("product-dialog-title").textContent = "Add product";
+  $("product-quantity").disabled = false;
+  $("product-form-message").hidden = true;
+  $("product-reorder").value = "5";
+
+  skuManuallyEdited = false;
+  suggestSku();
+
+  skuInput.readOnly = false;
+  skuHelp.textContent =
+    "Generated automatically. You can edit it if needed.";
+
+  saveButton.textContent = "Save product";
+  dialog.showModal();
+}
 
   async function openEditProduct(id) {
     try {
@@ -194,6 +231,10 @@ async function loadCategories() {
       $("product-id").value = product._id;
       $("product-name").value = product.name;
       $("product-sku").value = product.sku;
+      skuManuallyEdited = true;
+skuInput.readOnly = false;
+skuHelp.textContent =
+  "Existing SKU. Change it only if needed; it must remain unique.";
       $("product-category").value = product.categoryId?._id || "";
       $("product-price").value = product.unitPrice;
       $("product-quantity").value = product.quantityOnHand;
@@ -232,12 +273,23 @@ async function loadCategories() {
   }
 
   $("add-product-button").addEventListener("click", openNewProduct);
+  $("product-name").addEventListener("input", () => {
+  if (!skuManuallyEdited && !$("product-id").value) {
+    suggestSku();
+  }
+});
+
+skuInput.addEventListener("input", () => {
+  skuManuallyEdited = true;
+  skuHelp.textContent =
+    "Custom SKU. It must be unique across products.";
+});
 
   $("close-product-dialog").addEventListener("click", () => dialog.close());
   $("cancel-product").addEventListener("click", () => dialog.close());
 
   
-  
+
   tableBody.addEventListener("click", async (event) => {
     const button = event.target.closest("button[data-action]");
     if (!button) return;

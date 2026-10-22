@@ -145,9 +145,17 @@
         </div>
 
         <div class="form-field">
-          <label for="product-sku">SKU *</label>
-          <input id="product-sku" maxlength="40" required>
-        </div>
+  <label for="product-sku">SKU *</label>
+  <input
+    id="product-sku"
+    maxlength="40"
+    autocomplete="off"
+    required
+  >
+  <small id="sku-help" class="field-hint">
+    Generated automatically. You can edit it if needed.
+  </small>
+</div>
 
         <div class="form-field">
           <label for="product-category">Category *</label>
