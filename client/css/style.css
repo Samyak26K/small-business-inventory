@@ -1267,91 +1267,6 @@ h1 {
 
 
 
-/* Stock movement form */
-.stock-page {
-  width: auto;
-  max-width: 1800px;
-  min-width: 0;
-  margin-left: 250px;
-  padding: 30px 32px;
-}
-
-.stock-form-panel {
-  width: 100%;
-  max-width: 650px;
-  margin: 0;
-  padding: 26px;
-}
-
-.stock-form-panel h2 {
-  margin-bottom: 8px;
-}
-
-.stock-form-panel > .subtitle {
-  margin-bottom: 25px;
-}
-
-.stock-form-panel form {
-  display: grid;
-  gap: 16px;
-}
-
-.stock-form-panel .form-field {
-  margin-bottom: 0;
-  min-width: 0;
-}
-
-.stock-form-panel label {
-  display: block;
-}
-
-.stock-form-panel input,
-.stock-form-panel select {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: #171b24;
-  color: var(--text);
-}
-
-.stock-current {
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: #171b24;
-  color: #b9c3d7;
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.stock-form-panel button:disabled {
-  cursor: wait;
-  opacity: 0.6;
-}
-
-@media (max-width: 720px) {
-  .stock-page {
-    margin-left: 0;
-    padding: 23px 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .stock-page {
-    padding: 14px;
-  }
-
-  .stock-form-panel {
-    padding: 18px;
-  }
-}
-
-
-
 .report-toolbar {
   display: flex;
   align-items: center;
@@ -1660,3 +1575,149 @@ h1 {
     font-size: 11px;
   }
 }
+
+
+
+/* Stock Management - unified responsive layout */
+
+.stock-page {
+  width: auto;
+  max-width: 1800px;
+  min-width: 0;
+  margin-left: 250px;
+  padding: 30px 32px;
+  box-sizing: border-box;
+}
+
+.stock-page .stock-form-panel {
+  width: 100%;
+  max-width: 900px;
+  min-width: 0;
+  margin: 24px auto 0;
+  padding: 26px;
+  box-sizing: border-box;
+}
+
+.stock-page .stock-form-panel h2 {
+  margin-bottom: 8px;
+}
+
+.stock-page .stock-form-panel > .subtitle {
+  margin-bottom: 25px;
+}
+
+.stock-page #stock-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+
+.stock-page #stock-form .form-field {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+
+.stock-page #stock-form label {
+  display: block;
+}
+
+.stock-page #stock-form input,
+.stock-page #stock-form select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-sizing: border-box;
+  background: #171b24;
+  color: var(--text);
+}
+
+.stock-page #current-stock,
+.stock-page #stock-message,
+.stock-page #stock-submit {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.stock-page #current-stock {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #171b24;
+  color: #b9c3d7;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.stock-page #stock-message {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.stock-page #stock-submit {
+  width: 100%;
+  white-space: normal;
+}
+
+.stock-page #stock-submit:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+/* Tablet and narrower desktop */
+@media (max-width: 1000px) {
+  .stock-page {
+    padding: 24px;
+  }
+
+  .stock-page .stock-form-panel {
+    max-width: 100%;
+  }
+}
+
+/* Match the shared sidebar's mobile breakpoint */
+@media (max-width: 720px) {
+  .stock-page {
+    margin-left: 0;
+    padding: 23px 16px;
+  }
+
+  .stock-page .stock-form-panel {
+    margin-top: 18px;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 600px) {
+  .stock-page {
+    padding: 14px;
+  }
+
+  .stock-page .stock-form-panel {
+    padding: 18px;
+  }
+
+  .stock-page #stock-form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .stock-page #current-stock,
+  .stock-page #stock-message,
+  .stock-page #stock-submit {
+    grid-column: 1;
+  }
+
+  .stock-page .topbar .button {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
