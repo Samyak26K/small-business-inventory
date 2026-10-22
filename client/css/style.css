@@ -1400,3 +1400,122 @@ h1 {
 }
 
 
+/* Movement History - Record Movement Modal */
+
+.movement-dialog {
+  width: min(620px, calc(100% - 28px));
+}
+
+.movement-form {
+  padding: 25px;
+}
+
+.movement-fields {
+  display: grid;
+  gap: 16px;
+}
+
+.movement-form .form-field {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.movement-form .form-field label {
+  display: block;
+}
+
+.movement-form .form-field input,
+.movement-form .form-field select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+}
+
+.movement-form .stock-current {
+  margin: 0;
+}
+
+.movement-form .dialog-actions {
+  flex-wrap: wrap;
+}
+
+.movement-form button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .movement-form {
+    padding: 18px;
+  }
+
+  .movement-form .dialog-heading {
+    gap: 10px;
+  }
+
+  .movement-form .dialog-heading h2 {
+    font-size: 20px;
+  }
+}
+
+
+/* Dashboard - Recent Movements full-width responsive table */
+#recent-movements {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#recent-movements > .table-wrapper {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+#recent-movements .product-table {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  box-sizing: border-box;
+}
+
+#recent-movements .product-table th,
+#recent-movements .product-table td {
+  overflow-wrap: anywhere;
+}
+
+#recent-movements .product-table th:first-child,
+#recent-movements .product-table td:first-child {
+  width: 40%;
+}
+
+#recent-movements .product-table th:nth-child(2),
+#recent-movements .product-table td:nth-child(2) {
+  width: 16%;
+}
+
+#recent-movements .product-table th:nth-child(3),
+#recent-movements .product-table td:nth-child(3) {
+  width: 20%;
+}
+
+#recent-movements .product-table th:nth-child(4),
+#recent-movements .product-table td:nth-child(4) {
+  width: 24%;
+}
+
+@media (max-width: 600px) {
+  #recent-movements .table-wrapper {
+    margin: 0;
+  }
+
+  #recent-movements .product-table {
+    min-width: 520px;
+    table-layout: auto;
+  }
+}

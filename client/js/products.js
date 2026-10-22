@@ -236,10 +236,8 @@ async function loadCategories() {
   $("close-product-dialog").addEventListener("click", () => dialog.close());
   $("cancel-product").addEventListener("click", () => dialog.close());
 
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-
+  
+  
   tableBody.addEventListener("click", async (event) => {
     const button = event.target.closest("button[data-action]");
     if (!button) return;

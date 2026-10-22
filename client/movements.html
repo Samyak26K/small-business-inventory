@@ -39,7 +39,9 @@
         <h1>Movement History</h1>
         <p class="subtitle">Review stock changes, reasons and the users who performed them.</p>
       </div>
-      <a class="button button-primary" href="/stock-entry.html">+ Record movement</a>
+      <button class="button button-primary" id="open-movement-dialog" type="button">
+  + Record movement
+</button>
     </header>
 
     <section class="panel product-panel">
@@ -83,6 +85,84 @@
       </div>
     </section>
   </main>
+
+<dialog id="movement-dialog" class="product-dialog movement-dialog">
+  <form id="movement-form" class="product-form movement-form">
+    <div class="dialog-heading">
+      <div>
+        <p class="eyebrow">INVENTORY / OPERATIONS</p>
+        <h2>Record movement</h2>
+      </div>
+
+      <button
+        id="close-movement-dialog"
+        class="icon-button"
+        type="button"
+        aria-label="Close"
+      >×</button>
+    </div>
+
+    <div class="movement-fields">
+      <div class="form-field">
+        <label for="movement-product">Product *</label>
+        <select id="movement-product" required>
+          <option value="">Loading products...</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="movement-form-type">Movement type *</label>
+        <select id="movement-form-type" required>
+          <option value="IN">Stock In — receive goods</option>
+          <option value="OUT">Stock Out — issue goods</option>
+          <option value="ADJUSTMENT">Adjustment — set counted quantity</option>
+        </select>
+      </div>
+
+      <div id="movement-current-stock" class="stock-current">
+        Select a product to view current stock.
+      </div>
+
+      <div class="form-field">
+        <label id="movement-quantity-label" for="movement-quantity">
+          Movement quantity *
+        </label>
+        <input id="movement-quantity" type="number" min="1" step="1" required>
+      </div>
+
+      <div class="form-field">
+        <label for="movement-reason">Reason *</label>
+        <input
+          id="movement-reason"
+          maxlength="300"
+          required
+          placeholder="e.g. Supplier delivery or customer sale"
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="movement-reference">Reference (optional)</label>
+        <input
+          id="movement-reference"
+          maxlength="100"
+          placeholder="e.g. PO-1001 or invoice number"
+        >
+      </div>
+    </div>
+
+    <p id="movement-form-message" class="login-message" role="alert" hidden></p>
+
+    <div class="dialog-actions">
+      <button id="cancel-movement-dialog" class="button button-outline" type="button">
+        Cancel
+      </button>
+      <button id="save-movement" class="button button-primary" type="submit">
+        Save movement
+      </button>
+    </div>
+  </form>
+</dialog>
+
 
   <script>
     if (!sessionStorage.getItem("stockpilot_token")) {
