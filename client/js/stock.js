@@ -45,9 +45,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function showMessage(text, isError = false) {
-    message.textContent = text;
-    message.style.color = isError ? "#ff8b8b" : "";
+  if (!text) {
+    message.textContent = "";
+    return;
   }
+
+  window.StockPilotNotifications.show(
+    text,
+    isError ? "error" : "success"
+  );
+}
 
   try {
     const result = await apiRequest(

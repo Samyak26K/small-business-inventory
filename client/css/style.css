@@ -1721,3 +1721,134 @@ h1 {
   }
 }
 
+
+/* StockPilot toast notifications */
+.sp-toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(390px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.sp-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  color: #f4f6fb;
+  background: #202733;
+  border: 1px solid #374151;
+  border-left: 4px solid #60c99a;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px rgb(0 0 0 / 28%);
+  pointer-events: auto;
+  animation: sp-toast-enter 180ms ease-out;
+}
+
+.sp-toast-success {
+  border-left-color: #60c99a;
+}
+
+.sp-toast-error {
+  border-left-color: #f07878;
+}
+
+.sp-toast-warning {
+  border-left-color: #e9b75a;
+}
+
+.sp-toast-info {
+  border-left-color: #8b91ff;
+}
+
+.sp-toast-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 7%);
+  font-weight: 700;
+}
+
+.sp-toast-success .sp-toast-icon {
+  color: #60c99a;
+}
+
+.sp-toast-error .sp-toast-icon {
+  color: #f07878;
+}
+
+.sp-toast-warning .sp-toast-icon {
+  color: #e9b75a;
+}
+
+.sp-toast-info .sp-toast-icon {
+  color: #a7adff;
+}
+
+.sp-toast-message {
+  flex: 1;
+  min-width: 0;
+  margin: 3px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.sp-toast-close {
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: #aeb8c8;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sp-toast-close:hover {
+  color: #fff;
+}
+
+.sp-toast-leaving {
+  animation: sp-toast-exit 180ms ease-in forwards;
+}
+
+@keyframes sp-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sp-toast-exit {
+  to {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+
+@media (max-width: 600px) {
+  .sp-toast-container {
+    top: 12px;
+    right: 12px;
+    width: calc(100vw - 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-toast,
+  .sp-toast-leaving {
+    animation-duration: 1ms;
+  }
+}

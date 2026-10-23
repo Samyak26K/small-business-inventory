@@ -38,9 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showPageMessage(text, isError = false) {
-    message.textContent = text;
-    message.style.color = isError ? "#ff8b8b" : "";
-  }
+  message.textContent = "";
+  message.style.color = "";
+
+  if (!text) return;
+
+  window.StockPilotNotifications.show(
+    text,
+    isError ? "error" : "success"
+  );
+}
 
   function selectedProduct() {
     return products.find((product) =>
@@ -223,26 +230,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const movement = result.movement;
 
-      dialog.close();
-      form.reset();
-      updateQuantityLabel();
+dialog.close();
+form.reset();
+updateQuantityLabel();
 
-      page = 1;
+page = 1;
 
-      showPageMessage(
-        `${result.message} Stock changed from ${movement.quantityBefore} to ${movement.quantityAfter}.`
-      );
+await loadMovements();
+await loadProducts();
 
-      await loadMovements();
-      await loadProducts();
-
-      // Keep the success message visible after refreshing history.
-      showPageMessage(
-        `${result.message} Stock changed from ${movement.quantityBefore} to ${movement.quantityAfter}.`
-      );
+window.StockPilotNotifications.show(
+  `${result.message} Stock changed from ${movement.quantityBefore} to ${movement.quantityAfter}.`,
+  "success"
+);
     } catch (error) {
-      showFormMessage(error.message, true);
-    } finally {
+  window.StockPilotNotifications.show(error.message, "error");
+} finally {
       saveButton.disabled = false;
       saveButton.textContent = "Save movement";
     }
