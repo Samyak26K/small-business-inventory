@@ -157,16 +157,24 @@ export async function listProducts(req, res) {
 
     const total = await Product.countDocuments(filter);
 
+    const lowStockCount = await Product.countDocuments({
+  active: true,
+  $expr: {
+    $lte: ["$quantityOnHand", "$reorderLevel"]
+  }
+});
+
     return res.json({
-      success: true,
-      products,
-      pagination: {
-        page: pageNumber,
-        limit: pageSize,
-        total,
-        pages: Math.ceil(total / pageSize)
-      }
-    });
+  success: true,
+  products,
+  lowStockCount,
+  pagination: {
+    page: pageNumber,
+    limit: pageSize,
+    total,
+    pages: Math.ceil(total / pageSize)
+  }
+});
   } catch (error) {
     return handleError(res, error);
   }

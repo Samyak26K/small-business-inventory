@@ -138,10 +138,7 @@ async function loadCategories() {
 
       $("products-count").textContent = total;
 
-      const lowStock = products.filter(
-        (product) => product.active &&
-          product.quantityOnHand <= product.reorderLevel
-      ).length;
+      const lowStock = result.lowStockCount;
 
       const inventoryValue = products.reduce(
         (sum, product) =>
@@ -201,7 +198,7 @@ async function loadCategories() {
         '<tr><td colspan="7">Unable to load products.</td></tr>';
         
         $("catalog-status").textContent = "Unavailable";
-        
+
       setMessage(pageMessage, error.message, true);
     }
   }
