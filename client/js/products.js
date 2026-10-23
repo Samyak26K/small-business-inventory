@@ -119,6 +119,8 @@ async function loadCategories() {
   async function loadProducts() {
     tableBody.innerHTML =
       '<tr><td colspan="7">Loading products...</td></tr>';
+     
+      $("catalog-status").textContent = "Loading…";
 
     try {
       const params = new URLSearchParams({
@@ -197,7 +199,9 @@ async function loadCategories() {
     } catch (error) {
       tableBody.innerHTML =
         '<tr><td colspan="7">Unable to load products.</td></tr>';
-
+        
+        $("catalog-status").textContent = "Unavailable";
+        
       setMessage(pageMessage, error.message, true);
     }
   }
