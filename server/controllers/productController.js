@@ -163,11 +163,37 @@ export async function listProducts(req, res) {
     $lte: ["$quantityOnHand", "$reorderLevel"]
   }
 });
+    
+    const inventoryValueFilter = { ...filter };
+
+// Aggregation pipelines do not automatically cast category IDs.
+if (categoryId) {
+  inventoryValueFilter.categoryId =
+    new mongoose.Types.ObjectId(categoryId);
+}
+
+const inventoryValueResult = await Product.aggregate([
+  { $match: inventoryValueFilter },
+  {
+    $group: {
+      _id: null,
+      totalValue: {
+        $sum: {
+          $multiply: ["$quantityOnHand", "$unitPrice"]
+        }
+      }
+    }
+  }
+]);
+
+const inventoryValue = inventoryValueResult[0]?.totalValue ?? 0;
+
 
     return res.json({
   success: true,
   products,
   lowStockCount,
+  inventoryValue,
   pagination: {
     page: pageNumber,
     limit: pageSize,

@@ -147,7 +147,7 @@ async function loadCategories() {
       );
 
       $("products-low-stock").textContent = lowStock;
-      $("products-value").textContent = money(inventoryValue);
+      $("products-value").textContent = money(result.inventoryValue);
       $("catalog-status").textContent = "Live";
 
       const totalPages = Math.max(result.pagination.pages, 1);
